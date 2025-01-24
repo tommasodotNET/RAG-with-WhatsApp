@@ -1,10 +1,16 @@
+using CpmDemoApp;
 using CpmDemoApp.Models;
+using Microsoft.Bot.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<NotificationMessagesClientOptions>(builder.Configuration.GetSection("NotificationMessagesClientOptions"));
 builder.Services.Configure<OpenAIClientOptions>(builder.Configuration.GetSection("OpenAIClientOptions"));
+
+builder.Services.AddSingleton<ACSAdapter>();
+builder.Services.AddTransient<IBot, LLMService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
