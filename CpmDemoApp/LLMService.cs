@@ -52,11 +52,6 @@ public class LLMService : ActivityHandler
         _ = await channelBehavior.SendReplyOutAsync(turnContext, response!, cancellationToken).ConfigureAwait(false);
     }
 
-    public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
-    {
-        await base.OnMessageActivityAsync(turnContext as ITurnContext<IMessageActivity>, cancellationToken).ConfigureAwait(false);
-    }
-
     private async Task<string?> GenerateAIResponseAsync(string request)
     {
         var chatMessages = new List<ChatMessage> { new SystemChatMessage(SystemPrompt) };

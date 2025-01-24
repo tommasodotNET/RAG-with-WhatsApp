@@ -59,7 +59,7 @@ public class ACSAdapter : BotAdapter, IBotFrameworkHttpAdapter
         List<ResourceResponse> responses = new List<ResourceResponse>();
         foreach (Activity activity in activities)
         {
-            var recipientList = new List<string> { activity.From.Id };
+            var recipientList = new List<string> { activity.Conversation.Id };
             var textContent = new TextNotificationContent(_channelRegistrationId, recipientList, activity.Text);
             await _notificationMessagesClient.SendAsync(textContent);
             ResourceResponse item = new ResourceResponse
